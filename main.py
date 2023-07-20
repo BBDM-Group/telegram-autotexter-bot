@@ -1,24 +1,40 @@
-class Bot:
+import asyncio
+from time import sleep
 
-    def __init__(self):
-        self.api = Database.get_cfg()
+from pyrogram import Client, filters
 
-    def send(self, text, id):
-        pass
+from src.utils import *
+
+CFG = get_cfg()
+
+api_id = CFG['api_id']
+api_hash = CFG['api_hash']
+
+INTERVAL = 0.5
+
+app = Client(CFG['username'], CFG['api_id'], CFG['api_hash'])
 
 
-class Database:
+@app.on_message(filters=filters.incoming & ~filters.group & ~filters.channel)
+def log(client, message):
+    print(message)
 
-    def __init__(self):
-        pass
 
-    def get_ids(self):
-        pass
+async def main():
+    settings = get_settings()
+    while True:
+        if check_time(settings['timer']):
+            print('Sending...')
+            for chat_ids in settings['ids']:
+                await app.send_message(chat_ids, settings['text'])
+                sleep(INTERVAL)
+            new_timer = []
+            for i in settings['timer']:
+                new_timer.append(update_time(i, 7))
+            update_settings('timer', new_timer)
+        sleep(0.5)
 
-    @staticmethod
-    def get_cfg():
-        pass
 
-    def get_time(self):
-        # Нужно проверить, настроено ли время
-        pass
+if __name__ == '__main__':
+    app.run()
+    asyncio.run(main())
