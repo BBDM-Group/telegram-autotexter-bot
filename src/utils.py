@@ -21,7 +21,6 @@ def update_settings(key_to_update, new_content):
 
 
 def check_time(time):
-    print(str(datetime.strftime(datetime.now(), '%d-%m-%y %H:%M:%S')), " ||| ", time[0])
     return str(datetime.strftime(datetime.now(), '%d-%m-%y %H:%M:%S')) in time
 
 
