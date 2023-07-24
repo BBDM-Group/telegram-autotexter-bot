@@ -63,7 +63,10 @@ def all_messages(message: Message):
             bot.send_message(message.from_user.id, text='Доступные настройки: ', reply_markup=make_keyboard('settings'))
         elif message.text == 'Начать рассылку':
             bot.send_message(message.from_user.id, text='Начата рассылка...', reply_markup=make_keyboard('main_menu'))
-            mail()
+            try:
+                mail()
+            except Exception as e:
+                bot.send_message(message.from_user.id, text=f'Возникла ошибка: {e}')
         elif message.text == 'Настроить тексты':
             bot.send_message(message.from_user.id, 'Здесь можно настроить текст для рассылки и для пользователей',
                              reply_markup=make_keyboard('text_settings'))
