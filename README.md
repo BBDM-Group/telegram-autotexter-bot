@@ -5,7 +5,7 @@
 `git clone https://github.com/KewsenGeek/Telegram-autotexter-bot`
 
 ``
-pip3 install requirements.txt -r
+pip3 install -r requirements.txt
 ``
 
 Затем, нужно создать приложение на официальном сайте телеграмма: http://my.telegram.org
