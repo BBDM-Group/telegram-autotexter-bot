@@ -1,14 +1,11 @@
 FROM python:3.8.10
 
 USER root
-
 RUN mkdir /app
-WORKDIR /app
 
 COPY ./ /app/
 
-RUN python -m venv venv
-RUN /app/venv/bin/activate
+WORKDIR /app
 
 RUN pip install -r requirements.txt
 
