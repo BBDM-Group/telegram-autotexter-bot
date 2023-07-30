@@ -2,3 +2,4 @@ Pyrogram~=2.0.106
 pyTelegramBotAPI
 tgcrypto
 python-dotenv
+pynput

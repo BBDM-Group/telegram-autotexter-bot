@@ -8,10 +8,12 @@ certifi==2023.7.22        # via requests
 charset-normalizer==3.2.0  # via requests
 idna==3.4                 # via requests
 pyaes==1.6.1              # via pyrogram
+pynput==1.7.6             # via -r requirements.in
 pyrogram==2.0.106         # via -r requirements.in
 pysocks==1.7.1            # via pyrogram
 pytelegrambotapi==4.12.0  # via -r requirements.in
 python-dotenv==1.0.0      # via -r requirements.in
 requests==2.31.0          # via pytelegrambotapi
+six==1.16.0               # via pynput
 tgcrypto==1.2.5           # via -r requirements.in
 urllib3==2.0.4            # via requests
