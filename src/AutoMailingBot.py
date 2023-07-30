@@ -32,6 +32,7 @@ def mail():
     _chat_ids = [x.chat.id for x in app.get_dialogs() if x.chat.id < 0]
     
     logger.info(f'list of chats: [{str(_chat_ids)}]')
+    print(f'list of chats: [{str(_chat_ids)}]')
 
     # for chat_id in settings['ids']:
     for chat_id in _chat_ids:
@@ -45,10 +46,13 @@ def mail():
 
 
 def start_mailing():
+    print("started sender app")
     while True:
         settings = get_settings()
+        print(f'settings: [{str(settings)}]')
         if check_time(settings['timer']):
             try:
+                print('trying to send messages')
                 mail()
                 new_timer = []
                 for i in settings['timer']:
@@ -56,4 +60,5 @@ def start_mailing():
                 update_settings('timer', new_timer)
             except Exception as e: 
                 logger.error(f'Something went wrong: [{e}]')
+                print(f'Something went wrong: [{e}]')
         sleep(0.5)
