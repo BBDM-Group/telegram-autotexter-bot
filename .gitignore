@@ -1,3 +1,5 @@
 .idea
 venv
 ID.txt
+.session
+**/__pycache__
