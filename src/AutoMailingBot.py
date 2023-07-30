@@ -29,7 +29,7 @@ async def message_handler(client: Client, message: Message):
 
 def mail():
     settings = get_settings()
-    _chat_ids = [x.chat.id for x in app.get_dialogs() if x.chat.id < 0]
+    _chat_ids = [x.chat.id for x in app.get_dialogs() if (x.chat.id < 0 and x.chat.id not in settings['exclude_ids'])]
     
     logger.info(f'list of chats: [{str(_chat_ids)}]')
     print(f'list of chats: [{str(_chat_ids)}]')
@@ -47,9 +47,9 @@ def mail():
 
 def start_mailing():
     print("started sender app")
+
     while True:
         settings = get_settings()
-        print(f'settings: [{str(settings)}]')
         if check_time(settings['timer']):
             try:
                 print('trying to send messages')
