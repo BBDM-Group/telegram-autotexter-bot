@@ -29,21 +29,29 @@ ADMIN_POS = UserPosition.MAIN_MENU
 
 @bot.message_handler(commands=["start"])
 def start_message(message):
-    bot.send_message(
-        message.chat.id,
-        "Здравствуйте. Для управления ботом используйте кнопки ниже:",
-        reply_markup=make_keyboard('main_menu')
-    )
+    if message.from_user.id == get_settings()['admin_id']:
+        bot.send_message(
+            message.chat.id,
+            "Здравствуйте. Для управления ботом используйте кнопки ниже:",
+            reply_markup=make_keyboard('main_menu')
+        )
+    else:
+        logger.warning(f'Unauhtorized access attempt: [{message.from_user.id}]')
+        print(f'Unauhtorized access attempt: [{message.from_user.id}]')
+        bot.send_message(
+            message.chat.id,
+            "Unauthorized"
+        )
 
 
 def wait_input1(message: Message):
-    bot.send_message(message.from_user.id, 'Текст успешно обновлен')
     update_settings('text', message.text)
+    bot.send_message(message.from_user.id, 'Текст успешно обновлен')
 
 
 def wait_input2(message: Message):
-    bot.send_message(message.from_user.id, 'Текст усешно обновлен')
     update_settings('text_for_reply', message.text)
+    bot.send_message(message.from_user.id, 'Текст усешно обновлен')
 
 
 def wait_input_date(message: Message):

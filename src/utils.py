@@ -1,4 +1,6 @@
 import json
+import random
+
 from datetime import datetime, timedelta
 
 
@@ -27,3 +29,7 @@ def check_time(time):
 def update_time(time, new_time):
     old_time = datetime.strptime(time, '%d-%m-%y %H:%M:%S')
     return datetime.strftime(old_time + timedelta(days=new_time), '%d-%m-%y %H:%M:%S')
+
+
+def get_sleep_time():
+    return random.randrange(60, 180)

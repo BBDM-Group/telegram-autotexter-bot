@@ -1,4 +1,5 @@
 import logging 
+import random
 
 from time import sleep
 
@@ -16,7 +17,6 @@ CFG = get_cfg()
 api_id = CFG['api_id']
 api_hash = CFG['api_hash']
 
-INTERVAL = 0.5
 
 app = Client(CFG['username'], CFG['api_id'], CFG['api_hash'])
 
@@ -39,7 +39,9 @@ def mail():
         try:
             print(f'Sending message to {chat_id}')
             app.send_message(chat_id, settings['text'])
-            sleep(INTERVAL)
+            _sleep_time = get_sleep_time()
+            print(f'sleeping for [{_sleep_time} sec]')
+            sleep(_sleep_time)
         except Exception as e:
             print(f'Unable to send message: [{str(chat_id)}], error: [{e}]')
             logger.error(f'Unable to send message: [{str(chat_id)}], error: [{e}]')
