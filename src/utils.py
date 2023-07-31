@@ -17,7 +17,7 @@ def update_settings(key_to_update, new_content):
         content = json.load(f)
     content[key_to_update] = new_content
     with open('settings.json', 'w') as f:
-        json.dump(content, f)
+        json.dump(content, f, indent=4)
 
 
 def check_time(time):

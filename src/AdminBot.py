@@ -1,9 +1,14 @@
+import logging 
+
 import telebot
 from telebot.types import ReplyKeyboardMarkup, Message
 
 from src.utils import *
 from src.AdminBotKeyboard import AdminBotKeyboard
 from src.AutoMailingBot import mail
+
+
+logger = logging.getLogger(__name__)
 
 bot = telebot.TeleBot(get_settings()['admin_bot_api'])
 
@@ -89,20 +94,24 @@ def all_messages(message: Message):
 
 
 def make_keyboard(keyboard_type):
-    markup = ReplyKeyboardMarkup()
-    if keyboard_type == 'main_menu':
-        markup.add(bot_keyboard.settings)
-        markup.add(bot_keyboard.start_mailing)
-    if keyboard_type == 'settings':
-        markup.add(bot_keyboard.text_settings)
-        markup.add(bot_keyboard.timer_settings)
-        markup.add(bot_keyboard.back)
-    if keyboard_type == 'text_settings':
-        markup.add(bot_keyboard.text_for_mailing)
-        markup.add(bot_keyboard.text_for_users)
-        markup.add(bot_keyboard.back)
-    return markup
-
+    logger.info('Making admin keyboard')
+    try: 
+        markup = ReplyKeyboardMarkup()
+        if keyboard_type == 'main_menu':
+            markup.add(bot_keyboard.settings)
+            markup.add(bot_keyboard.start_mailing)
+        if keyboard_type == 'settings':
+            markup.add(bot_keyboard.text_settings)
+            markup.add(bot_keyboard.timer_settings)
+            markup.add(bot_keyboard.back)
+        if keyboard_type == 'text_settings':
+            markup.add(bot_keyboard.text_for_mailing)
+            markup.add(bot_keyboard.text_for_users)
+            markup.add(bot_keyboard.back)
+        logger.info(f'markup: [{str(markup)}]')
+        return markup
+    except Exception as e:
+        logger.error(f'Error making keyboard: [{e}]')
 
 def run_admin_bot():
     markup = telebot.types.ReplyKeyboardRemove()
