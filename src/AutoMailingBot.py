@@ -54,12 +54,14 @@ def start_mailing():
         settings = get_settings()
         if check_time(settings['timer']):
             try:
+                print(f'timer: [{settings["timer"]}]')
                 print('trying to send messages')
                 mail()
                 new_timer = []
                 for i in settings['timer']:
                     new_timer.append(update_time(i, 7))
                 update_settings('timer', new_timer)
+                print(f'new timer: [{settings["timer"]}]')
             except Exception as e: 
                 logger.error(f'Something went wrong: [{e}]')
                 print(f'Something went wrong: [{e}]')
