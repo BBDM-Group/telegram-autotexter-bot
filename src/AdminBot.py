@@ -95,6 +95,7 @@ def all_messages(message: Message):
 
 def make_keyboard(keyboard_type):
     logger.info('Making admin keyboard')
+    print('making admin keyboard')
     try: 
         markup = ReplyKeyboardMarkup()
         if keyboard_type == 'main_menu':
@@ -109,9 +110,11 @@ def make_keyboard(keyboard_type):
             markup.add(bot_keyboard.text_for_users)
             markup.add(bot_keyboard.back)
         logger.info(f'markup: [{str(markup)}]')
+        print(f'markup: [{str(markup)}]')
         return markup
     except Exception as e:
         logger.error(f'Error making keyboard: [{e}]')
+        print(f'Error making keyboard: [{e}]')
 
 def run_admin_bot():
     markup = telebot.types.ReplyKeyboardRemove()
