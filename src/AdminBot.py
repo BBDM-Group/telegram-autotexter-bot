@@ -89,8 +89,8 @@ def all_messages(message: Message):
                              '23:55:00\nЕсли таймеров несколько, то пишите их через запятую: \n21-07-23 23:55:00, '
                              '21-07-23 23:55:05')
             bot.register_next_step_handler(message, wait_input_date)
-        elif message.text == 'Настроить текст авторассылки':
-            bot.send_message(message.from_user.id, 'Отправьте текст, который вы хотите рассылать в чаты')
+        elif message.text == 'Добавить вариант текста авторассылки':
+            bot.send_message(message.from_user.id, 'Отправьте текст, который вы хотите добавить как вариант для рассылки в чате')
             bot.register_next_step_handler(message, wait_input1)
         elif message.text == 'Настроить универсальный текст для пользователей':
             bot.send_message(message.from_user.id, 'Отправьте текст, которым вы хотите отвечать пользователям')
@@ -114,7 +114,7 @@ def make_keyboard(keyboard_type):
             markup.add(bot_keyboard.timer_settings)
             markup.add(bot_keyboard.back)
         if keyboard_type == 'text_settings':
-            markup.add(bot_keyboard.text_for_mailing)
+            # markup.add(bot_keyboard.text_for_mailing)
             markup.add(bot_keyboard.text_for_users)
             markup.add(bot_keyboard.back)
         logger.info(f'markup: [{str(markup)}]')

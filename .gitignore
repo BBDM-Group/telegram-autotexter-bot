@@ -3,3 +3,4 @@ venv
 ID.txt
 .session
 **/__pycache__
+.vs

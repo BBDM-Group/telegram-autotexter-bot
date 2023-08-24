@@ -1,3 +1,4 @@
+from errno import EL
 import logging 
 import random
 
@@ -31,14 +32,25 @@ def mail():
     settings = get_settings()
     _chat_ids = [x.chat.id for x in app.get_dialogs() if (x.chat.id < 0 and x.chat.id not in settings['exclude_ids'])]
     
-    logger.info(f'list of chats: [{str(_chat_ids)}]')
-    print(f'list of chats: [{str(_chat_ids)}]')
+    amount_channels = settings.get('amount_channels', 0)
+    amount_channels = len(_chat_ids) if (amount_channels > len(_chat_ids) or amount_channels == 0) else amount_channels
+    
+    _chat_ids_trimmed = []
+    if amount_channels > 0 and amount_channels < len(_chat_ids):        
+        for i in range(amount_channels):
+            _id = random.choice([id for id in _chat_ids if id not in _chat_ids_trimmed])
+            _chat_ids_trimmed.append(_id)
+    else:
+        _chat_ids_trimmed = _chat_ids          
+    
+    logger.info(f'list of chats: [{str(_chat_ids_trimmed)}]')
+    print(f'list of chats: [{str(_chat_ids_trimmed)}]')
 
     # for chat_id in settings['ids']:
-    for chat_id in _chat_ids:
+    for chat_id in _chat_ids_trimmed:
         try:
             print(f'Sending message to {chat_id}')
-            app.send_message(chat_id, settings['text'])
+            app.send_message(chat_id, get_message_text(settings['text'], settings.get('error_depth', 1)))
             _sleep_time = get_sleep_time()
             print(f'sleeping for [{_sleep_time} sec]')
             sleep(_sleep_time)

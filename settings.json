@@ -1,8 +1,18 @@
 {
   "ids": [],
-  "text": "",
+  "exclude_ids": [],
+  "text": [
+    "1",
+    "2",
+    "3"
+  ],
   "timer": [],
   "text_for_reply": "",
   "admin_id": 0,
-  "admin_bot_api": ""
+  "admin_bot_api": "",
+  "bot_ua_str": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+  "system_version": "Android 7.0",
+  "device_model": "HUAWEI MHA-AL00",
+  "amount_channels": 0,
+  "error_depth": 2
 }
