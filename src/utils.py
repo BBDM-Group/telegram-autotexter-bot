@@ -36,7 +36,7 @@ def update_time(time, new_time):
 
 
 def get_sleep_time():
-    return random.randrange(300, 600)
+    return random.randrange(600, 1000)
 
 
 def get_message_text(lst_messages: List[str], error_depth: int = 1) -> str:
