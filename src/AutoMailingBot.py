@@ -1,5 +1,4 @@
-from errno import EL
-import logging 
+import logging
 import random
 
 from time import sleep
